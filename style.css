@@ -84,3 +84,52 @@ footer {
     font-size: 0.9rem;
     color: #8e949e;
 }
+/* --- Estilização do Efeito de Corações Flutuantes --- */
+
+/* O elemento base criado pelo JavaScript */
+.floating-heart {
+    position: fixed; /* Fixa na tela em relação ao clique */
+    width: 20px;
+    height: 20px;
+    background-color: #ff6b6b; /* Cor do coração (pode mudar para rosa se preferir) */
+    pointer-events: none; /* Garante que o clique 'passe direto' pelo coração */
+    transform: translate(-50%, -50%) rotate(45deg); /* Centraliza e rotaciona para forma base */
+    
+    /* Aplica a animação definida abaixo */
+    animation: flutuarESumir 2s ease-out forwards;
+    z-index: 1000; /* Garante que fique acima de tudo */
+}
+
+/* Transforma o quadrado em forma de coração usando os pseudo-elementos */
+.floating-heart::before,
+.floating-heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff6b6b;
+    border-radius: 50%; /* Faz as bordas redondas */
+}
+
+.floating-heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.floating-heart::after {
+    left: -10px;
+    top: 0;
+}
+
+/* Definição da animação: Sobe 100px e fica invisível */
+@keyframes flutuarESumir {
+    0% {
+        opacity: 1; /* Totalmente visível no início */
+        transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+    }
+    100% {
+        opacity: 0; /* Invisível no final */
+        /* Sobe -100px na vertical */
+        transform: translate(-50%, -50%) rotate(45deg) translateY(-100px);
+    }
+}
